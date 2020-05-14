@@ -1,0 +1,18 @@
+/**
+ * @param {TreeNode} root
+ * @param {number} L
+ * @param {number} R
+ * @return {number}
+ */
+var rangeSumBST = function(root, L, R) {
+    // check if value is in the given range
+    const isInBetween = val => val >= L && val <= R;
+    // sum the value if it's in the range
+    const add = (val, sum) => isInBetween(val) ? sum += val : sum;
+	// traverse through the nodes and sum the values in range
+    const preorder =(root, sum) => {
+        if (!root) return sum;
+        return add(root.val, sum) + preorder(root.left, sum) + preorder(root.right, sum);
+    } 
+    return preorder(root, 0)
+};
